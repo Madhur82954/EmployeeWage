@@ -4,6 +4,9 @@ namespace EmployeeWageComputationProblem
 {
     internal class Program
     {
+        public const int IS_FULL_TIME = 1;
+        public const int IS_PART_TIME = 2;
+        public const int EMP_RATE_PER_HOUR = 20;
         static void Main(string[] args)
         {
             /* //UC1 - Employee present or absent
@@ -42,7 +45,7 @@ namespace EmployeeWageComputationProblem
             Console.WriteLine("Employee wage = " + empwage); */
 
             //UC3 - Part time employeewage 
-            int IS_FULL_TIME = 1;
+            /* int IS_FULL_TIME = 1;
             int IS_PART_TIME = 2;
             int EMP_RATE_PER_HOUR = 20;
 
@@ -63,6 +66,30 @@ namespace EmployeeWageComputationProblem
             else
             {
                 emphrs = 0;
+            }
+            empwage = emphrs * EMP_RATE_PER_HOUR;
+            Console.WriteLine("Employee wage = " + empwage); */
+
+            //UC4 - using Switch case
+
+            int emphrs = 0;
+            int empwage = 0;
+
+            Random random = new Random();
+
+            int empcheck = random.Next(0, 2);
+            switch (empcheck)
+            {
+                case IS_PART_TIME:
+                    emphrs = 4;
+                    break;
+                case IS_FULL_TIME:
+                    emphrs = 8;
+                    break;
+                default:
+                    emphrs = 0;
+                    break;
+
             }
             empwage = emphrs * EMP_RATE_PER_HOUR;
             Console.WriteLine("Employee wage = " + empwage);
