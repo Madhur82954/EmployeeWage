@@ -7,6 +7,7 @@ namespace EmployeeWageComputationProblem
         public const int IS_FULL_TIME = 1;
         public const int IS_PART_TIME = 2;
         public const int EMP_RATE_PER_HOUR = 20;
+        public const int NUM_OF_WORKING_DAYS = 2;
         static void Main(string[] args)
         {
             /* //UC1 - Employee present or absent
@@ -74,26 +75,32 @@ namespace EmployeeWageComputationProblem
 
             int emphrs = 0;
             int empwage = 0;
+            int totalempWage = 0;
 
-            Random random = new Random();
-
-            int empcheck = random.Next(0, 2);
-            switch (empcheck)
+            for (int day = 0; day < NUM_OF_WORKING_DAYS; day++)
             {
-                case IS_PART_TIME:
-                    emphrs = 4;
-                    break;
-                case IS_FULL_TIME:
-                    emphrs = 8;
-                    break;
-                default:
-                    emphrs = 0;
-                    break;
+                Random random = new Random();
 
+                int empcheck = random.Next(0, 3);
+
+                switch (empcheck)
+                {
+                    case IS_PART_TIME:
+                        emphrs = 4;
+                        break;
+                    case IS_FULL_TIME:
+                        emphrs = 8;
+                        break;
+                    default:
+                        emphrs = 0;
+                        break;
+
+                }
+                empwage = emphrs * EMP_RATE_PER_HOUR;
+                totalempWage += empwage;
+                Console.WriteLine("Employee wage = " + empwage);
             }
-            empwage = emphrs * EMP_RATE_PER_HOUR;
-            Console.WriteLine("Employee wage = " + empwage);
-
+            Console.WriteLine("Total Emp Wage = " + totalempWage);
         }
     }
 }
