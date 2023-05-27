@@ -6,12 +6,12 @@ namespace EmployeeWageComputationProblem
     {
         public const int IS_FULL_TIME = 1;
         public const int IS_PART_TIME = 2;
-        public const int EMP_RATE_PER_HOUR = 20;
-        public const int NUM_OF_WORKING_DAYS = 2;
-        public const int MAX_HRS_PER_MONTH = 10;
+        //public const int EMP_RATE_PER_HOUR = 20;
+        //public const int NUM_OF_WORKING_DAYS = 2;
+        //public const int MAX_HRS_PER_MONTH = 10;
 
-        //UC-7 using class Methods 
-        public static int EmployeeWage()
+        //UC8-Employee Wage for Multiple Companies
+        public static int ComputeEmployeeWage(string company,int EMP_RATE_PER_HOUR,int MAX_HRS_PER_MONTH,int NUM_OF_WORKING_DAYS)
         {
             int emphrs = 0;
             int totalemphrs = 0;
@@ -44,6 +44,41 @@ namespace EmployeeWageComputationProblem
             Console.WriteLine("Total Emp Wage = " + totalempwage);
             return totalempwage;
         }
+
+        //UC-7 using class Methods 
+        /*public static int EmployeeWage()
+        {
+            int emphrs = 0;
+            int totalemphrs = 0;
+            int totalworkingdays = 0;
+
+            while (totalemphrs <= MAX_HRS_PER_MONTH && totalworkingdays < NUM_OF_WORKING_DAYS)
+            {
+                totalworkingdays++;
+                Random random = new Random();
+
+                int empcheck = random.Next(0, 3);
+
+                switch (empcheck)
+                {
+                    case IS_PART_TIME:
+                        emphrs = 4;
+                        break;
+                    case IS_FULL_TIME:
+                        emphrs = 8;
+                        break;
+                    default:
+                        emphrs = 0;
+                        break;
+
+                }
+                totalemphrs += emphrs;
+                Console.WriteLine("Days# " + totalworkingdays + " Emp Hrs :" + emphrs);
+            }
+            int totalempwage = totalemphrs * EMP_RATE_PER_HOUR;
+            Console.WriteLine("Total Emp Wage = " + totalempwage);
+            return totalempwage;
+        }*/
         static void Main(string[] args)
         {
             /* //UC1 - Employee present or absent
@@ -170,8 +205,11 @@ namespace EmployeeWageComputationProblem
             Console.WriteLine("Total Emp Wage = " + totalempwage);*/
 
             //UC7-EmployeeWage using class methods
-            EmployeeWage();
-            
+            //EmployeeWage();
+
+            //UC8- Employee Wage for Multiple Company using Class Methods 
+            ComputeEmployeeWage("Dmart", 20, 2, 10);
+            ComputeEmployeeWage("Reliance", 10, 4, 20);
         }
     }
 }
