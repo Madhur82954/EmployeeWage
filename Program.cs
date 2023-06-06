@@ -8,6 +8,7 @@ namespace EmployeeWageComputationProblem
     {
         void AddCompany(string name, int wagePerHour, int workingHoursPerMonth, int workingDaysPerMonth);
         void CalculateWages();
+        int GetTotalWageByCompany(string companyName);
     }
     internal class Employee
     {
@@ -71,7 +72,7 @@ namespace EmployeeWageComputationProblem
     }
 
     internal class CompanyEmpWage
-        {
+    {
         private string name;
         private int wagePerHour;
         private int workingHoursPerMonth;
@@ -106,7 +107,7 @@ namespace EmployeeWageComputationProblem
         }
     }
 
-    internal class EmpWageBuilder:IComputeWage
+    internal class EmpWageBuilder : IComputeWage
     {
         private List<CompanyEmpWage> companies;
 
@@ -150,15 +151,31 @@ namespace EmployeeWageComputationProblem
                 }
             }
         }
+        public int GetTotalWageByCompany(string companyName)
+        {
+            foreach (var company in companies)
+            {
+                if (company.GetName() == companyName)
+                {
+                    Employee employee = new Employee(true, false, company.GetWagePerHour(), company.GetWorkingHoursPerMonth());
+                    employee.CalculateMonthlyWage(company.GetWorkingHoursPerMonth(), company.GetWorkingDaysPerMonth());
+                    return employee.GetTotalWage();
+                }
+            }
+            return 0;
+        }
     }
-}
-internal class Program
-{
+    internal class Program
+    {
         static void Main(string[] args)
         {
             IComputeWage empWageBuilder = new EmpWageBuilder();
-            empWageBuilder.AddCompany("dMart", 20, 2, 10); 
-            empWageBuilder.AddCompany("Reliance", 10, 4, 20); 
+            empWageBuilder.AddCompany("dMart", 20, 2, 10);
+            empWageBuilder.AddCompany("Reliance", 10, 4, 20);
             empWageBuilder.CalculateWages();
-        } 
+            string companyName = "dMart";
+            int totalWage = empWageBuilder.GetTotalWageByCompany(companyName);
+            Console.WriteLine($"Total wage for {companyName}: {totalWage}");
+        }
+    }
 }
