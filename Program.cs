@@ -2,6 +2,58 @@
 
 namespace EmployeeWageComputationProblem
 {
+    public class EmpWageBuilderObject
+    {
+        public const int IS_FULL_TIME = 1;
+        public const int IS_PART_TIME = 2;
+
+        private string company;
+        private int empRatePerHour;
+        private int numofWorkingDays;
+        private int maxHourPerMonth;
+        private int totalEmpWage;
+        public EmpWageBuilderObject(string company,int empRatePerHour,int numofWorkingDays,int maxHourPerMonth) 
+        {
+            this.company = company;
+            this.empRatePerHour = empRatePerHour;
+            this.numofWorkingDays = numofWorkingDays;
+            this.maxHourPerMonth = maxHourPerMonth;
+        }
+        public void computeEmpWage()
+        {
+            int emphrs = 0, totalemphrs = 0,totalworkingdays = 0;
+
+            while (totalemphrs <= this.maxHourPerMonth && totalworkingdays < this.numofWorkingDays)
+            {
+                totalworkingdays++;
+                Random random = new Random();
+
+                int empcheck = random.Next(0, 3);
+
+                switch (empcheck)
+                {
+                    case IS_PART_TIME:
+                        emphrs = 4;
+                        break;
+                    case IS_FULL_TIME:
+                        emphrs = 8;
+                        break;
+                    default:
+                        emphrs = 0;
+                        break;
+
+                }
+                totalemphrs += emphrs;
+                Console.WriteLine("Days# " + totalworkingdays + " Emp Hrs :" + emphrs);
+            }
+            int totalempwage = totalemphrs * this.empRatePerHour;
+            Console.WriteLine("Total Emp Wage = " + totalempwage);
+        }
+        public string toString()
+        {
+            return "Total Emp Wage For Company : "+this.company+" is :"+this.totalEmpWage;
+        }
+    }
     internal class Program
     {
         public const int IS_FULL_TIME = 1;
@@ -11,7 +63,7 @@ namespace EmployeeWageComputationProblem
         //public const int MAX_HRS_PER_MONTH = 10;
 
         //UC8-Employee Wage for Multiple Companies
-        public static int ComputeEmployeeWage(string company,int EMP_RATE_PER_HOUR,int MAX_HRS_PER_MONTH,int NUM_OF_WORKING_DAYS)
+        /*public static int ComputeEmployeeWage(string company,int EMP_RATE_PER_HOUR,int MAX_HRS_PER_MONTH,int NUM_OF_WORKING_DAYS)
         {
             int emphrs = 0;
             int totalemphrs = 0;
@@ -43,7 +95,7 @@ namespace EmployeeWageComputationProblem
             int totalempwage = totalemphrs * EMP_RATE_PER_HOUR;
             Console.WriteLine("Total Emp Wage = " + totalempwage);
             return totalempwage;
-        }
+        }*/
 
         //UC-7 using class Methods 
         /*public static int EmployeeWage()
@@ -81,6 +133,13 @@ namespace EmployeeWageComputationProblem
         }*/
         static void Main(string[] args)
         {
+            //UC9-compute and save total wage
+            EmpWageBuilderObject dMart = new EmpWageBuilderObject("dMart",20,2,10);
+            EmpWageBuilderObject reliance = new EmpWageBuilderObject("Reliance",10,4,20);
+            dMart.computeEmpWage();
+            Console.WriteLine(dMart.toString());
+            reliance.computeEmpWage();
+            Console.WriteLine(reliance.toString());
             /* //UC1 - Employee present or absent
              int IS_FULL_TIME = 1;
              Random random = new Random();
@@ -208,8 +267,8 @@ namespace EmployeeWageComputationProblem
             //EmployeeWage();
 
             //UC8- Employee Wage for Multiple Company using Class Methods 
-            ComputeEmployeeWage("Dmart", 20, 2, 10);
-            ComputeEmployeeWage("Reliance", 10, 4, 20);
+            //ComputeEmployeeWage("Dmart", 20, 2, 10);
+            //ComputeEmployeeWage("Reliance", 10, 4, 20);
         }
     }
 }
