@@ -16,6 +16,7 @@ namespace EmployeeWageComputationProblem
         private int wagePerHour;
         private int workingHours;
         private int totalWage;
+        private List<int> dailyWages;
 
         public Employee(bool isPresent, bool isPartTime, int wagePerHour, int workingHours)
         {
@@ -24,6 +25,7 @@ namespace EmployeeWageComputationProblem
             this.wagePerHour = wagePerHour;
             this.workingHours = workingHours;
             this.totalWage = 0;
+            this.dailyWages = new List<int>();
         }
 
         public bool IsPresent()
@@ -61,6 +63,10 @@ namespace EmployeeWageComputationProblem
         public int GetTotalWage()
         {
             return totalWage;
+        }
+        public List<int> GetDailyWages()
+        {
+            return dailyWages;
         }
     }
 
